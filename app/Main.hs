@@ -20,9 +20,9 @@ fizzBuzzMulti num = map fizzBuzzOne [1..num]
 
 fizzBuzzWithPrompt :: IO ()
 fizzBuzzWithPrompt = 
-    putStrLn "Please enter how many numbers you want in the FizzBuzz" >> input >>= getLine >>
+    putStrLn "Please enter how many numbers you want in the FizzBuzz" >> getLine >>= \input ->
     -- TODO: use a total function instead for read
-    let num = (read input :: Int) >> putStr . unlines $ fizzBuzzMulti num
+    let num = (read input :: Int) in putStr . unlines $ fizzBuzzMulti num
 
 
 -- NOTES

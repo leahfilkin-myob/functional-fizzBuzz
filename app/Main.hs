@@ -1,11 +1,12 @@
 module Main (main) where
 
 -- import Lib
+import Text.Read ( readMaybe ) 
 
 main :: IO ()
 -- main = someFunc
 
-main = undefined
+main = fizzBuzzWithPrompt
 
 fizzBuzzOne :: Int -> String
 fizzBuzzOne num 
@@ -18,13 +19,27 @@ fizzBuzzOne num
 fizzBuzzMulti :: Int -> [String]
 fizzBuzzMulti num = map fizzBuzzOne [1..num]
 
+promptPositiveInt :: IO Int 
+promptPositiveInt =  do
+    userInput <- getLine
+    let num = (readMaybe userInput :: Maybe Int) 
+    case num of 
+        Just x -> pure x
+        Nothing -> putStrLn "Incorrect type - expecting positive integer: " >> promptPositiveInt
+
+
 fizzBuzzWithPrompt :: IO ()
-fizzBuzzWithPrompt = 
-    putStrLn "Please enter how many numbers you want in the FizzBuzz" >> getLine >>= \input ->
-    -- TODO: use a total function instead for read
-    let num = (read input :: Int) in putStr . unlines $ fizzBuzzMulti num
+fizzBuzzWithPrompt =
+    putStrLn "Please enter how many numbers you want in the FizzBuzz" >> promptPositiveInt >>= \input -> putStr . unlines $ fizzBuzzMulti input
 
 
 -- NOTES
 -- function composition vs function application ( . vs $)
 -- domain = all of inputs, range = all of outputs, function = maps domain to range
+-- \input -> expression = (input) => expression in c#
+-- go function = recursive helper function
+
+
+-- TODO:
+-- look into binds ( >>= =<< )
+-- applicative vs monad vs monoid 

@@ -4,8 +4,6 @@ module Main (main) where
 import Text.Read ( readMaybe ) 
 
 main :: IO ()
--- main = someFunc
-
 main = fizzBuzzWithPrompt
 
 fizzBuzzOne :: Int -> String

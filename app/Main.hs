@@ -25,12 +25,12 @@ promptPositiveInt =  do
     let num = (readMaybe userInput :: Maybe Int) 
     case num of 
         Just x -> pure x
-        Nothing -> putStrLn "Incorrect type - expecting positive integer: " >> promptPositiveInt
+        Nothing -> putStr "Incorrect type - expecting positive integer: " >> promptPositiveInt
 
 
 fizzBuzzWithPrompt :: IO ()
 fizzBuzzWithPrompt =
-    putStrLn "Please enter how many numbers you want in the FizzBuzz" >> promptPositiveInt >>= \input -> putStr . unlines $ fizzBuzzMulti input
+    putStr "Please enter how many numbers you want in the FizzBuzz: " >> promptPositiveInt >>= \input -> putStr . unlines $ fizzBuzzMulti input
 
 
 -- NOTES
